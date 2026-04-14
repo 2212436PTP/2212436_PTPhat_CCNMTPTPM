@@ -2,37 +2,57 @@
 
 import { useEffect, useState } from "react";
 
-type ThemeMode = "system" | "light" | "dark";
+type ThemeMode = "system" | "dark" | "light";
+
+function resolveDarkMode(mode: ThemeMode): boolean {
+  if (mode === "dark") {
+    return true;
+  }
+  if (mode === "light") {
+    return false;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
 
 function applyTheme(mode: ThemeMode) {
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const isDark = mode === "dark" || (mode === "system" && systemDark);
-  const root = document.documentElement;
-  root.classList.toggle("dark", isDark);
+  document.documentElement.classList.toggle("dark", resolveDarkMode(mode));
 }
 
 export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const [mode, setMode] = useState<ThemeMode>("system");
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof window === "undefined") {
+      return "system";
+    }
+
+    const saved = localStorage.getItem("theme") as ThemeMode | null;
+    return saved === "system" || saved === "dark" || saved === "light"
+      ? saved
+      : "system";
+  });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as ThemeMode | null;
-    const initialTheme: ThemeMode =
-      savedTheme === "light" || savedTheme === "dark" || savedTheme === "system"
-        ? savedTheme
-        : "system";
+    applyTheme(mode);
+    localStorage.setItem("theme", mode);
+  }, [mode]);
 
-    setMode(initialTheme);
-    applyTheme(initialTheme);
-    setMounted(true);
-  }, []);
+  useEffect(() => {
+    if (mode !== "system") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => applyTheme("system");
+    mediaQuery.addEventListener("change", onChange);
+
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, [mode]);
 
   const toggleTheme = () => {
-    const nextTheme: ThemeMode =
+    const nextMode: ThemeMode =
       mode === "system" ? "dark" : mode === "dark" ? "light" : "system";
-    setMode(nextTheme);
-    applyTheme(nextTheme);
-    localStorage.setItem("theme", nextTheme);
+
+    setMode(nextMode);
   };
 
   const title =
@@ -50,7 +70,7 @@ export default function ThemeToggle() {
       title={title}
       className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-emerald-50 dark:hover:bg-gray-800 transition-colors"
     >
-      {mounted && mode === "dark" ? (
+      {mode === "dark" ? (
         <svg
           className="w-5 h-5"
           viewBox="0 0 24 24"
@@ -64,7 +84,7 @@ export default function ThemeToggle() {
             strokeLinejoin="round"
           />
         </svg>
-      ) : mounted && mode === "light" ? (
+      ) : mode === "light" ? (
         <svg
           className="w-5 h-5"
           viewBox="0 0 24 24"

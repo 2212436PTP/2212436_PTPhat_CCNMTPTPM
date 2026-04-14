@@ -4,20 +4,12 @@ import { getPostBySlug, posts } from "@/src/data/posts";
 import LikeButton from "@/src/components/like-button";
 
 interface BlogPostPageProps {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const joinedSlug = slug.join("/");
-
-  // Intentional runtime error for testing error boundary at /blog/trigger-error
-  if (joinedSlug === "trigger-error") {
-    const broken = undefined as unknown as { callMethod: () => void };
-    broken.callMethod();
-  }
-
-  const post = getPostBySlug(joinedSlug);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -57,6 +49,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
 export async function generateStaticParams() {
   return posts.map((post) => ({
-    slug: [post.slug],
+    slug: post.slug,
   }));
 }

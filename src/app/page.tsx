@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import Counter from "@/src/components/counter";
+import CopyButton from "@/src/components/copy-button";
 
 export default function HomePage() {
   return (
@@ -75,6 +76,9 @@ export default function HomePage() {
         </p>
         <div className="flex justify-center">
           <Counter />
+        </div>
+        <div className="mt-4 flex justify-center">
+          <CopyButton textToCopy="2212436@dlu.edu.vn" />
         </div>
       </div>
 
