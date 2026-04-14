@@ -9,6 +9,13 @@ interface BlogPostPageProps {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const joinedSlug = slug.join("/");
+
+  // Intentional runtime error for testing error boundary at /blog/trigger-error
+  if (joinedSlug === "trigger-error") {
+    const broken = undefined as unknown as { callMethod: () => void };
+    broken.callMethod();
+  }
+
   const post = getPostBySlug(joinedSlug);
 
   if (!post) {
