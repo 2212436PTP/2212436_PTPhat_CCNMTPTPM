@@ -9,6 +9,10 @@ export default function AboutPage() {
           ngành Công nghệ Thông tin tại Đại học Đà Lạt.
         </p>
 
+        <p>
+          MSSV: <strong>2212436</strong> | Lớp: <strong>CTK46</strong>
+        </p>
+
         <h2 className="text-2xl font-semibold mt-8 mb-4">Kỹ năng</h2>
         <ul className="list-disc list-inside space-y-2">
           <li>JavaScript / TypeScript</li>
@@ -25,6 +29,12 @@ export default function AboutPage() {
             Cử nhân Công nghệ Thông tin (2021 — 2025)
           </p>
         </div>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Định hướng</h2>
+        <p>
+          Mục tiêu của tôi là trở thành lập trình viên Full-Stack, xây dựng các
+          sản phẩm web có tính ứng dụng cao và trải nghiệm người dùng tốt.
+        </p>
       </div>
     </div>
   );

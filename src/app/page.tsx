@@ -8,6 +8,7 @@ export default function HomePage() {
         <p className="text-xl text-gray-600 mb-2">
           Sinh viên Công nghệ Thông tin — Đại học Đà Lạt
         </p>
+        <p className="text-lg text-gray-500 mb-2">MSSV: 2212436 | Lớp: CTK46</p>
         <p className="text-lg text-gray-500">
           Đam mê phát triển web và các công nghệ mới
         </p>

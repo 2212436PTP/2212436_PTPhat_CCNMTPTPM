@@ -6,6 +6,12 @@ export default function ContactPage() {
       <div className="space-y-4 text-gray-700">
         <div className="bg-gray-50 rounded-lg p-6 space-y-3">
           <p>
+            <strong>Họ và tên:</strong> Phan Thành Phát
+          </p>
+          <p>
+            <strong>MSSV:</strong> 2212436
+          </p>
+          <p>
             <strong>Email:</strong>{" "}
             <a
               href="mailto:2212436@dlu.edu.vn"
@@ -26,8 +32,10 @@ export default function ContactPage() {
             </a>
           </p>
           <p>
-            <strong>Địa chỉ:</strong> Đại học Đà Lạt, 01 Phù Đổng Thiên Vương,
-            Đà Lạt
+            <strong>Trường:</strong> Đại học Đà Lạt
+          </p>
+          <p>
+            <strong>Địa chỉ:</strong> 01 Phù Đổng Thiên Vương, Đà Lạt
           </p>
         </div>
       </div>
