@@ -3,6 +3,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">Xin chào! 👋</h1>
+        <p className="text-lg text-gray-700 mb-6 italic">
+          Tôi là một sinh viên yêu thích lập trình web và luôn khám phá những công nghệ mới để phát triển kỹ năng của mình.
+        </p>
         <p className="text-xl text-gray-600 mb-2">
           Họ và tên: <strong>Phan Thành Phát</strong>
         </p>
