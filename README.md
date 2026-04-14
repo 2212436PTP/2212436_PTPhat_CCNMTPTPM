@@ -1,2 +1,3 @@
-# 2212436_PTPhat_CCNMTPTPM_LAB01
-B√†i th·ª±c h√†nh 1 - Thi·∫øt l·∫≠p m√¥i tr∆∞·ªùng ph√°t tri·ªÉn"
+"# BÖi Th?c HÖnh 1" 
+"" 
+"DÉy lÖ project th?c hÖnh cho mìn C†c cìng ngh? m?i trong PTPM." 
