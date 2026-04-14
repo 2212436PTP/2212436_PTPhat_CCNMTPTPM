@@ -1,3 +1,16 @@
+# Project Lab: Các Công Nghệ Mới Trong PTPM
+
+## Mô Tả Dự Án
+
+Đây là một dự án học tập nhằm khám phá và thực hành các công nghệ mới trong phát triển phần mềm hiện đại. Project được xây dựng bằng **Next.js** - một framework React tiên tiến, kết hợp với **TypeScript** để đảm bảo chất lượng code cao.
+
+**Thông tin dự án:**
+- **Sinh viên:** Phan Thành Phát (2212436)
+- **Môn học:** Các công nghệ mới trong PTPM
+- **Công nghệ:** Next.js 14+, TypeScript, React, Tailwind CSS
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
