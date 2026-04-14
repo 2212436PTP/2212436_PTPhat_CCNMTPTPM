@@ -1,4 +1,4 @@
-const projects = [
+﻿const projects = [
   {
     title: "Website Portfolio",
     description: "Website cá nhân xây dựng bằng Next.JS và Tailwind CSS",
@@ -34,7 +34,7 @@ export default function ProjectsPage() {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="border rounded-lg p-6 hover:shadow-md transition-shadow flex flex-col"
+            className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg p-6 hover:shadow-md transition-shadow flex flex-col"
           >
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-xl font-semibold">{project.title}</h2>
@@ -49,13 +49,15 @@ export default function ProjectsPage() {
               </span>
             </div>
 
-            <p className="text-gray-600 mb-4 flex-1">{project.description}</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1">
+              {project.description}
+            </p>
 
             <div className="flex flex-wrap gap-2">
               {project.tech.map((t) => (
                 <span
                   key={t}
-                  className="bg-blue-100 text-blue-700 text-sm px-3 py-1 rounded-full"
+                  className="bg-emerald-100 text-emerald-700 text-sm px-3 py-1 rounded-full"
                 >
                   {t}
                 </span>

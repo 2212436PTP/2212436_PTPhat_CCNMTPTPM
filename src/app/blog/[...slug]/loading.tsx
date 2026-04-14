@@ -5,7 +5,7 @@ export default function BlogDetailLoading() {
 
       <article>
         <div className="flex items-center gap-3 mb-6">
-          <div className="h-6 w-20 bg-blue-100 rounded" />
+          <div className="h-6 w-20 bg-emerald-100 rounded" />
           <div className="h-4 w-24 bg-gray-200 rounded" />
           <div className="h-4 w-32 bg-gray-200 rounded" />
         </div>
