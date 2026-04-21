@@ -6,6 +6,13 @@ interface BlogPostPageProps {
   params: Promise<{ id: string }>;
 }
 
+interface PostComment {
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
 async function getPost(id: string): Promise<Post> {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
   if (!res.ok) {
@@ -24,10 +31,26 @@ async function getUser(userId: number): Promise<User> {
   return res.json();
 }
 
+async function getComments(postId: string): Promise<PostComment[]> {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
+  );
+  if (!res.ok) {
+    throw new Error("Không thể tải bình luận");
+  }
+  return res.json();
+}
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = await params;
-  const post = await getPost(id);
-  const author = await getUser(post.userId);
+  const postPromise = getPost(id);
+  const commentsPromise = getComments(id);
+  const authorPromise = postPromise.then((post) => getUser(post.userId));
+  const [post, comments, author] = await Promise.all([
+    postPromise,
+    commentsPromise,
+    authorPromise,
+  ]);
 
   return (
     <div>
@@ -49,6 +72,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="prose max-w-none text-gray-700 whitespace-pre-line mb-8 leading-relaxed">
           {post.body}
         </div>
+
+        <div className="border-t pt-6 mb-8">
+          <h3 className="font-semibold mb-4">Bình luận ({comments.length})</h3>
+          <div className="space-y-4">
+            {comments.map((comment) => (
+              <div key={comment.id} className="rounded-lg border p-4">
+                <p className="font-medium text-gray-800">{comment.name}</p>
+                <p className="text-sm text-gray-500 mb-2">{comment.email}</p>
+                <p className="text-sm text-gray-700 whitespace-pre-line">
+                  {comment.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="border-t pt-6">
           <h3 className="font-semibold mb-2">Về tác giả</h3>
           <p className="text-gray-600 text-sm">
