@@ -12,8 +12,8 @@ export default function AboutPage() {
         </Avatar>
         <div className="text-gray-700">
           <p>
-            Xin chào! Tôi là <strong>Phan Thành Phát</strong>, sinh viên năm 4 ngành
-            Công nghệ Thông tin tại Đại học Đà Lạt.
+            Xin chào! Tôi là <strong>Phan Thành Phát</strong>, sinh viên năm 4
+            ngành Công nghệ Thông tin tại Đại học Đà Lạt.
           </p>
           <p>
             MSSV: <strong>2212436</strong> | Lớp: <strong>CTK46</strong>
@@ -39,17 +39,18 @@ export default function AboutPage() {
         <TabsContent value="education" className="mt-4 text-gray-700">
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="font-medium">Đại học Đà Lạt</p>
-            <p className="text-gray-500">Cử nhân Công nghệ Thông tin (2021 — 2025)</p>
+            <p className="text-gray-500">
+              Cử nhân Công nghệ Thông tin (2021 — 2025)
+            </p>
           </div>
         </TabsContent>
         <TabsContent value="goal" className="mt-4 text-gray-700">
           <p>
-            Mục tiêu của tôi là trở thành lập trình viên Full-Stack, xây dựng các
-            sản phẩm web có tính ứng dụng cao và trải nghiệm người dùng tốt.
+            Mục tiêu của tôi là trở thành lập trình viên Full-Stack, xây dựng
+            các sản phẩm web có tính ứng dụng cao và trải nghiệm người dùng tốt.
           </p>
         </TabsContent>
       </Tabs>
-      </div>
     </div>
   );
 }
