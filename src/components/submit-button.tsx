@@ -2,32 +2,40 @@
 
 import { ReactNode } from "react";
 import { useFormStatus } from "react-dom";
+import { Button } from "@/components/ui/button";
+import { VariantProps } from "class-variance-authority";
+import { buttonVariants } from "@/components/ui/button";
 
 interface SubmitButtonProps {
   children: ReactNode;
   pendingText?: string;
-  className?: string;
   disabled?: boolean;
+  className?: string;
+  variant?: VariantProps<typeof buttonVariants>["variant"];
+  size?: VariantProps<typeof buttonVariants>["size"];
 }
 
 export default function SubmitButton({
   children,
   pendingText = "Đang xử lý...",
-  className,
   disabled = false,
+  className,
+  variant = "default",
+  size = "default",
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
 
   return (
-    <button
+    <Button
       type="submit"
+      variant={variant}
+      size={size}
       disabled={pending || disabled}
       className={
-        className ??
-        "w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className ?? "w-full disabled:opacity-50 disabled:cursor-not-allowed"
       }
     >
       {pending ? pendingText : children}
-    </button>
+    </Button>
   );
 }

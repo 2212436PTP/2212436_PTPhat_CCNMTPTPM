@@ -1,4 +1,13 @@
-﻿const projects = [
+﻿import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+const projects = [
   {
     title: "Website Portfolio",
     description: "Website cá nhân xây dựng bằng Next.JS và Tailwind CSS",
@@ -29,41 +38,32 @@ export default function ProjectsPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-6">Dự án</h1>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project, index) => (
-          <div
-            key={index}
-            className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg p-6 hover:shadow-md transition-shadow flex flex-col"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-xl font-semibold">{project.title}</h2>
-              <span
-                className={`text-xs px-2 py-1 rounded-full ${
-                  project.status === "Hoàn thành"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"
-                }`}
-              >
-                {project.status}
-              </span>
-            </div>
-
-            <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-              {project.description}
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="bg-emerald-100 text-emerald-700 text-sm px-3 py-1 rounded-full"
+          <Card key={index} className="hover:shadow-md transition-shadow">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">{project.title}</CardTitle>
+                <Badge
+                  variant={
+                    project.status === "Hoàn thành" ? "default" : "secondary"
+                  }
                 >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
+                  {project.status}
+                </Badge>
+              </div>
+              <CardDescription>{project.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((t) => (
+                  <Badge key={t} variant="outline">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
