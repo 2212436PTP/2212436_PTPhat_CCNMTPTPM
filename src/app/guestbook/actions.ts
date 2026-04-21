@@ -2,6 +2,13 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { guestbookEntries } from "@/data/guestbook";
+
+const DUPLICATE_WINDOW_MS = 60 * 1000;
+
+function normalizeText(value: string) {
+  return value.trim().toLowerCase();
+}
+
 // Định nghĩa schema validation cho guestbook
 const guestbookSchema = z.object({
   name: z
@@ -37,6 +44,32 @@ export async function createGuestbookEntry(
       errors: result.error.flatten().fieldErrors,
     };
   }
+
+  const normalizedName = normalizeText(result.data.name);
+  const normalizedMessage = normalizeText(result.data.message);
+  const now = Date.now();
+
+  const isDuplicateInOneMinute = guestbookEntries.some((entry) => {
+    const createdAt = new Date(entry.createdAt).getTime();
+    if (Number.isNaN(createdAt) || now - createdAt > DUPLICATE_WINDOW_MS) {
+      return false;
+    }
+
+    return (
+      normalizeText(entry.name) === normalizedName &&
+      normalizeText(entry.message) === normalizedMessage
+    );
+  });
+
+  if (isDuplicateInOneMinute) {
+    return {
+      success: false,
+      errors: {
+        message: ["Không thể gửi lời nhắn trùng lặp trong vòng 1 phút"],
+      },
+    };
+  }
+
   // Thêm entry mới vào mảng
   const newEntry = {
     id: Date.now().toString(),
